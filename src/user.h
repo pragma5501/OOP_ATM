@@ -9,7 +9,7 @@
 
 class User {
 private:
-        Account my_accounts[MAX_NUM_ACCOUNT];
+        Account* my_accounts[MAX_NUM_ACCOUNT];
         
 public:
         User();

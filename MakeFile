@@ -24,7 +24,7 @@ TARGET_OBJ =\
 
 all : my_atm
 
-my_pftl: $(TARGET_OBJ)
+my_atm: $(TARGET_OBJ)
 	@mkdir -p $(BIN_DIR)
 	g++ -o    $(BIN_DIR)/$@ $(GCCFLAGS) $^ -I$(INC_DIR)
 

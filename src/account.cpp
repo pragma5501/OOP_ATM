@@ -3,15 +3,17 @@
 
 using namespace std;
 
+int Account::next_account_number = (ACCOUNT_NUMBER_BASE_OFFSET);
+
 Account::Account (__account_param_t param)
 {
-        account_number = param.account_number;
-        password = param.password;
-        user_id = param.user_id;
-        owner = param.owner;
-        my_bank = param.my_bank;
+        this->account_number = this->next_account_number++;
+        this->password = param.password;
+        this->user_id = param.user_id;
+        this->owner = param.owner;
+        this->my_bank = param.my_bank;
 
-        balance = 0;
+        this->balance = 0;
 }
 
 Account::~Account ()
@@ -22,8 +24,8 @@ Account::~Account ()
 void Account::diplay_account_info ()
 {
         cout << "Account [";
-        cout << "Bank: " << my_bank.get_bank_name() << ",";
+        cout << "Bank: " << my_bank->get_bank_name() << ",";
         cout << "No: " << account_number << ",";
-        cout << "Owner: " << owner.get_user_name() << "] ";
+        cout << "Owner: " << owner->get_user_name() << "] ";
         cout << "balance: " << balance;
 }
