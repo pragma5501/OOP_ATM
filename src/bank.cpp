@@ -3,41 +3,54 @@
 Bank::Bank (string bank_name)
 {
         this->name = bank_name;
-
-        this->num_of_ATMs = 0;
-        this->num_of_accounts = 0;
 }
 
 Bank::~Bank ()
 {
 
 }
-ATM* Bank::find_ATM (int ATM_serial_number)
-{
-        for (int i = 0; i < num_of_ATMs; i++) {
-                if (ATMs[i]->get_serial_number() != ATM_serial_number) continue;
-                return ATMs[i];
-        }
 
-        cout << "Cannot find ATM" << endl;
-        return (ATM*)0;
+string Bank::get_bank_name()
+{
+        return name;
 }
 
-void Bank::deposit (int ATM_serial_number, int* cash)
+
+
+
+void Bank::deposit (ATM* target_ATM)
 {
-        ATM* target_ATM = find_ATM(ATM_serial_number);
-        if (target_ATM == (ATM*)0) {
-                return;
-        }
+        display_cut_line();
+        cout << "Primary Bank : Enter the amoount of fund to deposit to ATM" << endl;
+        cout << "Example) 1 1 0 1" << endl;
+        cout << "-> 1000 + 5000 + 10000 * 0 + 50000 = 56000" << endl;
+        cout << "Cash : ";
+        int cash[4];
+        cin >> cash[0] >> cash[1] >> cash[2] >> cash[3];
         
         target_ATM->receive_cash_available(cash);
 }
 
-void Bank::look_up_account_info (int account_number)
+void Bank::look_up_account_info (string account_number)
 {
         Account* target_account = accounts[account_number];
         //Exception Handling Need.
         
-        target_account->diplay_account_info();
+        target_account->display_account_info();
 }
 
+bool Bank::flag_check_password(Account* user_account, string password)
+{
+        if (user_account->get_password() == password) return true;
+        return false;
+}
+
+void Bank::display_bank_info ()
+{
+        cout << "[Bank : " << name << "]"<< endl;
+}
+
+void Bank::push_ATM(ATM* my_ATM) 
+{
+        ATMs[my_ATM->get_serial_number()] = my_ATM;
+}
